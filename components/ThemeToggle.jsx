@@ -19,7 +19,6 @@ export default function ThemeToggle() {
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const darkModePreferred =
-     
       savedTheme === "dark" ||
       (!savedTheme &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);

@@ -310,7 +310,7 @@ export default function SignUp() {
           Already have an account?
           <Link
             href="/auth/signin"
-            className="font-medium ml-1 text-teal-800 hover:text-teal-900 dark:text-teal-700 dark:hover:text-teal-600"
+            className="font-medium ml-1 text-teal-800 hover:text-teal-900 dark:text-teal-500 dark:hover:text-teal-600"
           >
             Sign in
           </Link>

@@ -19,16 +19,11 @@ import IngredientsFilter from "@/components/IngredientsFilter";
 import CategoryFilter from "@/components/CategoryFilter";
 import SortOrder from "@/components/SortOrder";
 
+// Create a custom event name for resetting search
+export const RESET_SEARCH_EVENT = 'resetSearch';
+
 /**
  * Default filter values object that defines the initial state of all filters
- * @constant {Object} DEFAULT_VALUES
- * @property {string} category - The recipe category filter
- * @property {string} sortBy - The sorting field
- * @property {string} order - The sort order (ascending/descending)
- * @property {string} search - The search query
- * @property {string} numberOfSteps - Filter for number of recipe steps
- * @property {Array} tags - Array of selected tags
- * @property {string} tagMatchType - Type of tag matching ("all" or "any")
  */
 const DEFAULT_VALUES = {
   category: "",
@@ -42,15 +37,6 @@ const DEFAULT_VALUES = {
 
 /**
  * FilterSection component that provides a comprehensive filtering interface for recipes
- * @component
- * @param {Object} props - Component props
- * @param {Array} [props.categories=[]] - Available recipe categories
- * @param {string} [props.initialCategory=DEFAULT_VALUES.category] - Initial category selection
- * @param {string} [props.initialSort=DEFAULT_VALUES.sortBy] - Initial sort field
- * @param {string} [props.initialOrder=DEFAULT_VALUES.order] - Initial sort order
- * @param {Array} [props.availableTags=[]] - Available tags for filtering
- * @param {Array} [props.availableIngredients=[]] - Available ingredients for filtering
- * @returns {JSX.Element} Rendered FilterSection component
  */
 export default function FilterSection({
   categories = [],
@@ -86,40 +72,32 @@ export default function FilterSection({
 
   /**
    * Updates URL parameters based on filter changes
-   * @function updateUrl
    * @param {Object} newParams - New parameters to update in the URL
    */
   const updateUrl = (newParams) => {
-    // Create a new URLSearchParams instance from current search params
     const params = new URLSearchParams(searchParams.toString());
 
-    // Process each new parameter
     Object.entries(newParams).forEach(([key, value]) => {
       if (Array.isArray(value)) {
-        // For array values, remove existing and append all new values
         params.delete(key);
         value.forEach((v) => params.append(key, v));
       } else if (value === DEFAULT_VALUES[key]) {
-        // If value matches default, remove the parameter
         params.delete(key);
       } else if (value) {
-        // If value exists, set the parameter
         params.set(key, value);
       } else {
-        // If no value, remove the parameter
         params.delete(key);
       }
     });
 
-    // Navigate to the updated URL
     router.push(`${pathname}?${params.toString()}`);
   };
 
   /**
    * Resets all filters to their default values
-   * @function handleResetFilters
    */
   const handleResetFilters = () => {
+    // Reset filter state
     setFilterState({
       category: DEFAULT_VALUES.category,
       sortBy: DEFAULT_VALUES.sortBy,
@@ -127,13 +105,17 @@ export default function FilterSection({
       search: DEFAULT_VALUES.search,
       numberOfSteps: DEFAULT_VALUES.numberOfSteps,
     });
+    
+    // Clear URL parameters
     router.push(pathname);
+    
+    // Dispatch custom event to reset search
+    const resetEvent = new CustomEvent(RESET_SEARCH_EVENT);
+    window.dispatchEvent(resetEvent);
   };
 
   /**
    * Determines if any filters are currently active
-   * @function isFilterActive
-   * @returns {boolean} True if any filters are applied
    */
   const isFilterActive = useMemo(() => {
     return (
@@ -143,7 +125,6 @@ export default function FilterSection({
     );
   }, [filterState, searchParams]);
 
-  // Render the filter section
   return (
     <>
       {/* Trigger Button - Fixed on the left side */}

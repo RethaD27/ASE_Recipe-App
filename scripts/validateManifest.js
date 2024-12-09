@@ -29,7 +29,7 @@ const manifestSchema = {
      */
     display: {
       type: "string",
-      enum: ["fullscreen", "standalone", "minimal-ui", "browser"]
+      enum: ["fullscreen", "standalone", "minimal-ui", "browser"],
     },
 
     /**
@@ -54,9 +54,9 @@ const manifestSchema = {
           /**
            * @property {string} type - MIME type of the icon file (e.g., "image/png").
            */
-          type: { type: "string" }
-        }
-      }
+          type: { type: "string" },
+        },
+      },
     },
 
     /**
@@ -99,14 +99,14 @@ const manifestSchema = {
               required: ["src", "sizes"],
               properties: {
                 src: { type: "string" },
-                sizes: { type: "string", pattern: "^[0-9]+x[0-9]+$" }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                sizes: { type: "string", pattern: "^[0-9]+x[0-9]+$" },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 /**
@@ -130,7 +130,9 @@ const validateManifest = (filePath) => {
       console.error("Manifest validation failed:", validate.errors);
     }
   } catch (error) {
-    console.error(`Error reading or parsing the manifest file: ${error.message}`);
+    console.error(
+      `Error reading or parsing the manifest file: ${error.message}`
+    );
   }
 };
 

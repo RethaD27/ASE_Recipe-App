@@ -68,7 +68,7 @@ export default function Pagination({
   };
 
   /**
-   * Handle page change navigation
+   * Handle page change navigation and scroll to the top of the page
    *
    * @param {number} newPage - The page number to navigate to
    */
@@ -77,6 +77,9 @@ export default function Pagination({
       setPage(newPage);
       const queryString = createQueryString(newPage);
       router.push(`?${queryString}`, { scroll: false });
+
+      // Scroll to the top of the page with smooth animation
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -223,11 +226,11 @@ export default function Pagination({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M15 19l-7-7 7-7" />
+            <path d="M15 19l-7-7 7-7"></path>
           </svg>
         </button>
 
-        {/* Page numbers */}
+        {/* Page Numbers */}
         {renderPageNumbers()}
 
         {/* Next page Button */}
@@ -254,24 +257,9 @@ export default function Pagination({
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M9 5l7 7-7 7" />
+            <path d="M9 5l7 7-7 7"></path>
           </svg>
         </button>
-      </div>
-
-      {/* Results summary */}
-      <div className="text-sm text-gray-600" role="status" aria-live="polite">
-        {isLoading ? (
-          "Loading results..."
-        ) : (
-          <>
-            Showing {startResult.toLocaleString()} -{" "}
-            {endResult.toLocaleString()} of {totalResults.toLocaleString()}{" "}
-            results
-            {totalPages > 1 &&
-              ` (Page ${currentPage.toLocaleString()} of ${totalPages.toLocaleString()})`}
-          </>
-        )}
       </div>
     </div>
   );

@@ -56,7 +56,9 @@ export async function GET() {
       .toArray();
 
     // Filter out duplicates using the store
-    const uniqueRecipes = rawRecipes.filter((recipe) => recipeStore.add(recipe));
+    const uniqueRecipes = rawRecipes.filter((recipe) =>
+      recipeStore.add(recipe)
+    );
 
     // Return only the top 10 unique recipes
     return NextResponse.json({ recipes: uniqueRecipes.slice(0, 10) });

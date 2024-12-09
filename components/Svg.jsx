@@ -18,7 +18,11 @@ export const Instructions = () => (
     className="w-6 h-6 text-teal-700 dark:text-teal-400"
   >
     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-    <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    ></g>
     <g id="SVGRepo_iconCarrier">
       <path d="M92.2,2v107.3C77,110.2,63.4,119.4,57,133.4L2.4,254H79l4.9-16.3c21.1-5.1,36.9-21.1,43.6-41.3h116.1V2H92.2z M233.8,186.5 H112.6c-3.1,14.5-13.8,27.3-28.2,33.2c-0.5,0.2-1,0.3-1.5,0.3c-1.6,0-3-0.9-3.6-2.5c-0.8-2,0.1-4.5,2.2-5.1 c13.5-4.4,24-18.5,24.3-33.5l0-5.7h38.5c5.9,0,10.7-4.8,10.7-10.7v-0.2c0-5.9-4.8-10.7-10.7-10.7l-68.6,0c-2.2,0-3.9-1.8-3.9-3.9 s1.8-3.9,3.9-3.9H102V11.8h131.7V186.5z M193.6,49.1h-51.5v-9.8h51.5V49.1z M215.3,80.7h-94.8v-9.8h94.8V80.7z M215.3,106.3h-94.8 v-9.8h94.8V106.3z M215.3,131.9h-94.8V122h94.8V131.9z"></path>
     </g>
@@ -254,7 +258,12 @@ export const allergenSVGs = {
     </svg>
   ),
   soy: (
-    <svg viewBox="0 0 24 24" version="1.1" fill="none" className="w-10 h-10 text-teal-700 dark:text-teal-400">
+    <svg
+      viewBox="0 0 24 24"
+      version="1.1"
+      fill="none"
+      className="w-10 h-10 text-teal-700 dark:text-teal-400"
+    >
       <title>Soy Bean</title>
       <g
         id="Soy-Bean"

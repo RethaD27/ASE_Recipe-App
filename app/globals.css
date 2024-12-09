@@ -4,14 +4,14 @@
 
 :root {
   --background: #ffffff; /* Slate-100 for light mode */
-  --foreground: #0C3B2E; /* Dark green for text */
+  --foreground: #0c3b2e; /* Dark green for text */
   --card-bg: #ffffff; /* White for card background */
   --navbar-bg: #2563eb; /* Teal-800 for light mode */
   --navbar-text: #ffffff; /* White text for navbar */
-  --button-bg: #DB8C28;
-  --text-color: #0C3B2E;
+  --button-bg: #db8c28;
+  --text-color: #0c3b2e;
   --feature-bg: #ffffff;
-  --feature-text: #0C3B2E;
+  --feature-text: #0c3b2e;
 }
 
 .dark {
@@ -20,7 +20,7 @@
   --card-bg: #1e293b; /* Slate-800 for dark mode card */
   --navbar-bg: #1e40af; /* Darker teal for dark mode */
   --navbar-text: #daf1de; /* Light green text for navbar */
-  --button-bg: #DB8C28;
+  --button-bg: #db8c28;
   --text-color: #daf1de;
   --feature-bg: #1e293b;
   --feature-text: #daf1de;
@@ -41,14 +41,30 @@ body {
 }
 
 @layer utilities {
-  .text-balance { text-wrap: balance; }
-  .bg-navbar { background-color: var(--navbar-bg); }
-  .text-navbar { color: var(--navbar-text); }
-  .bg-card { background-color: var(--card-bg); }
-  .bg-button { background-color: var(--button-bg); }
-  .text-feature { color: var(--feature-text); }
-  .bg-feature { background-color: var(--feature-bg); }
-  .text-primary { color: var(--text-color); }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-navbar {
+    background-color: var(--navbar-bg);
+  }
+  .text-navbar {
+    color: var(--navbar-text);
+  }
+  .bg-card {
+    background-color: var(--card-bg);
+  }
+  .bg-button {
+    background-color: var(--button-bg);
+  }
+  .text-feature {
+    color: var(--feature-text);
+  }
+  .bg-feature {
+    background-color: var(--feature-bg);
+  }
+  .text-primary {
+    color: var(--text-color);
+  }
 }
 .custom-scrollbar::-webkit-scrollbar {
   width: 1rem;

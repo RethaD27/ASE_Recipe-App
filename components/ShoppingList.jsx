@@ -10,8 +10,8 @@ import {
   Plus,
   X,
 } from "lucide-react";
-import { toast } from "sonner";
 import { getIngredientUnit } from "./IngredientUnit";
+import Alert from "./Alert";
 
 /**
  * ShoppingList Component
@@ -33,6 +33,22 @@ export default function ShoppingList({ ingredients }) {
   const [listName, setListName] = useState(""); // Name of the new shopping list
   const [isVisible, setIsVisible] = useState(true); // Controls visibility of the shopping list section
   const [showModal, setShowModal] = useState(false); // Add this state
+
+  // New state for Alert
+  const [alert, setAlert] = useState({
+    isVisible: false,
+    message: "",
+    type: "success",
+  });
+
+  // Helper function to show alert
+  const showAlert = (message, type = "success", duration = 5000) => {
+    setAlert({
+      isVisible: true,
+      message,
+      type,
+    });
+  };
 
   /**
    * Fetch shopping lists when the session changes.
@@ -57,7 +73,7 @@ export default function ShoppingList({ ingredients }) {
       setLists(data);
     } catch (error) {
       console.error("Error fetching shopping lists:", error);
-      toast.error("Failed to fetch shopping lists");
+      showAlert("Failed to fetch shopping lists", "error");
     } finally {
       setFetchingLists(false);
     }
@@ -101,11 +117,11 @@ export default function ShoppingList({ ingredients }) {
 
   const createShoppingList = async () => {
     if (!session) {
-      toast.error("Please sign in to create a shopping list");
+      showAlert("Please sign in to create a shopping list", "error");
       return;
     }
     if (!listName.trim()) {
-      toast.error("Please enter a name for your shopping list");
+      showAlert("Please enter a name for your shopping list", "error");
       return;
     }
 
@@ -125,11 +141,11 @@ export default function ShoppingList({ ingredients }) {
 
       setListName("");
       setSelectedItems([]);
-      toast.success("Shopping list created successfully!");
+      showAlert("Shopping list created successfully!");
       fetchLists();
     } catch (error) {
       console.error("Error creating shopping list:", error);
-      toast.error("Failed to create shopping list");
+      showAlert("Failed to create shopping list", "error");
     } finally {
       setLoading(false);
       setShowModal(false);
@@ -138,7 +154,7 @@ export default function ShoppingList({ ingredients }) {
 
   const addItemsToList = async (id) => {
     if (!selectedItems.length) {
-      toast.error("Please select items to add");
+      showAlert("Please select items to add", "error");
       return;
     }
 
@@ -157,13 +173,13 @@ export default function ShoppingList({ ingredients }) {
       }
 
       setSelectedItems([]);
-      toast.success("Items added to list successfully!");
+      showAlert("Items added to list successfully!");
       setSelectedItems([]);
       fetchLists();
       setSelectedId(null);
     } catch (error) {
       console.error("Error adding items to list:", error);
-      toast.error("Failed to add items to the list");
+      showAlert("Failed to add items to the list", "error");
     } finally {
       setAddingToList(null);
     }
@@ -171,6 +187,14 @@ export default function ShoppingList({ ingredients }) {
 
   return (
     <div className="bg-white p-6 rounded-2xl shadow-sm space-y-6 dark:bg-gray-700">
+      {/* Alert Component */}
+      <Alert
+        message={alert.message}
+        type={alert.type}
+        isVisible={alert.isVisible}
+        onClose={() => setAlert((prev) => ({ ...prev, isVisible: false }))}
+      />
+
       <div className="flex items-center gap-2">
         <ShoppingCart className="w-6 h-6 text-teal-600 dark:text-teal-400" />
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">

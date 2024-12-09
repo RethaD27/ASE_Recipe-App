@@ -37,9 +37,7 @@ export default function ImageSelector({ images }) {
     <div className="relative">
       {/* Main Selected Image */}
       <div className="m-2 lg:m-10 md:m-10 rounded-xl bg-gray-100 dark:bg-gray-700">
-        <div
-          className="rounded-xl flex lg:h-[400px] sm:h-[250px] md:h-[400px]"
-        >
+        <div className="rounded-xl flex lg:h-[400px] sm:h-[250px] md:h-[400px]">
           <Image
             src={images[currentIndex]}
             alt="Selected"
@@ -52,9 +50,9 @@ export default function ImageSelector({ images }) {
         {/* Arrow Buttons */}
         {images.length > 1 && (
           <ArrowButtons
-              onPrevClick={handlePrevClick}
-              onNextClick={handleNextClick}
-              className="absolute top-1/2 left-4 transform -translate-y-1/2 rounded-full p-2 focus:outline-none"
+            onPrevClick={handlePrevClick}
+            onNextClick={handleNextClick}
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 rounded-full p-2 focus:outline-none"
           />
         )}
 
@@ -78,7 +76,7 @@ export default function ImageSelector({ images }) {
                 />
               </div>
             ))}
-          </div>  
+          </div>
         )}
       </div>
     </div>

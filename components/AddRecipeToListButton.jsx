@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ListPlus } from "lucide-react";
+import Alert from "./Alert";
 
 /**
  * AddRecipeToListButton Component
@@ -16,19 +17,18 @@ import { ListPlus } from "lucide-react";
  */
 const AddRecipeToListButton = ({ ingredients, shoppingListId, recipeName }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [notification, setNotification] = useState(null);
+  const [alert, setAlert] = useState({
+    isVisible: false,
+    message: "",
+    type: "success",
+  });
 
-  /**
-   * Show notification
-   *
-   * Displays a notification with the specified message and type for 3 seconds.
-   *
-   * @param {string} message - The message to display.
-   * @param {string} [type='success'] - The type of the notification ('success' or 'error').
-   */
-  const showNotification = (message, type = "success") => {
-    setNotification({ message, type });
-    setTimeout(() => setNotification(null), 3000);
+  const showAlert = (message, type = "success") => {
+    setAlert({
+      isVisible: true,
+      message,
+      type,
+    });
   };
 
   /**
@@ -69,7 +69,7 @@ const AddRecipeToListButton = ({ ingredients, shoppingListId, recipeName }) => {
           );
         }
 
-        showNotification(`${items.length} ingredients added to shopping list`);
+        showAlert(`${items.length} ingredients added to shopping list`);
       } catch (parseError) {
         if (response.status === 404) {
           throw new Error("Shopping list endpoint not found");
@@ -88,7 +88,7 @@ const AddRecipeToListButton = ({ ingredients, shoppingListId, recipeName }) => {
         errorMessage = "Network error: Please check your connection";
       }
 
-      showNotification(errorMessage, "error");
+      showAlert(errorMessage, "error");
     } finally {
       setIsLoading(false);
     }
@@ -96,6 +96,13 @@ const AddRecipeToListButton = ({ ingredients, shoppingListId, recipeName }) => {
 
   return (
     <div className="relative">
+      <Alert
+        message={alert.message}
+        type={alert.type}
+        isVisible={alert.isVisible}
+        onClose={() => setAlert((prev) => ({ ...prev, isVisible: false }))}
+      />
+
       <button
         onClick={addIngredientsToList}
         disabled={isLoading}
@@ -104,18 +111,6 @@ const AddRecipeToListButton = ({ ingredients, shoppingListId, recipeName }) => {
         <ListPlus className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-2" />
         {isLoading ? "Adding..." : "Add All to Shopping List"}
       </button>
-
-      {notification && (
-        <div
-          className={`absolute top-full mt-2 right-0 p-3 rounded-lg shadow-lg text-sm w-64 z-50 ${
-            notification.type === "error"
-              ? "bg-red-50 text-red-700 dark:bg-red-900 dark:text-red-100"
-              : "bg-teal-50 text-teal-700 dark:bg-teal-900 dark:text-teal-100"
-          }`}
-        >
-          {notification.message}
-        </div>
-      )}
     </div>
   );
 };

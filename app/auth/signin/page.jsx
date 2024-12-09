@@ -264,6 +264,12 @@ export default function SignIn() {
                 )}
               </button>
             </div>
+            <Link
+            href="/auth/forgot-password"
+            className="flex justify-end font-medium mt-2 text-teal-800 hover:text-teal-900 dark:text-teal-500 dark:hover:text-teal-600"
+          >
+            Forgot Password?
+          </Link>
           </div>
 
           {/* Submit button */}
@@ -276,15 +282,17 @@ export default function SignIn() {
           </button>
         </form>
 
-        {/* Sign-up link */}
+        {/* Sign-up and Forgot Password links */}
         <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
-          Don&apos;t have an account?
+          Don&apos;t have an account?{" "}
           <Link
             href="/auth/signup"
-            className="font-medium ml-1 text-teal-800 hover:text-teal-900 dark:text-teal-700 dark:hover:text-teal-600"
+            className="font-medium text-teal-800 hover:text-teal-900 dark:text-teal-500 dark:hover:text-teal-600"
           >
             Create account
           </Link>
+          <span className="mx-2">|</span>
+          
         </p>
       </div>
     </div>

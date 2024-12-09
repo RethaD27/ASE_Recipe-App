@@ -2,7 +2,6 @@
 
 import { DownloadIcon, CheckIcon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { toast } from "sonner";
 
 /**
  * Represents a recipe object with download and version information.
@@ -17,9 +16,10 @@ import { toast } from "sonner";
  * @component
  * @param {Object} props - Component properties
  * @param {Recipe} props.recipe - The recipe to be downloaded
+ * @param {function} [props.onAlert] - Optional callback to show alert in parent component
  * @returns {JSX.Element|null} Download button or null if no recipe is provided
  */
-export default function DownloadButton({ recipe }) {
+export default function DownloadButton({ recipe, onAlert }) {
   /**
    * Tracks whether the recipe has been downloaded
    * @type {[boolean, function]}
@@ -54,13 +54,17 @@ export default function DownloadButton({ recipe }) {
    * Handles the recipe download process
    * - Validates recipe data
    * - Manages local storage of downloaded recipes
-   * - Provides user feedback via toast notifications
+   * - Provides user feedback via alerts
    * @async
    */
   const handleDownload = async () => {
     // Early validation check
     if (!recipe) {
-      toast.error("No recipe data available");
+      onAlert &&
+        onAlert({
+          message: "No recipe data available",
+          type: "error",
+        });
       return;
     }
 
@@ -92,16 +96,28 @@ export default function DownloadButton({ recipe }) {
           recipeToSave.version
         ) {
           downloadedRecipes[existingRecipeIndex] = recipeToSave;
-          toast.info("Recipe updated to latest version");
+          onAlert &&
+            onAlert({
+              message: "Recipe updated to latest version",
+              type: "info",
+            });
         } else {
-          toast.warning("Recipe already saved!");
+          onAlert &&
+            onAlert({
+              message: "Recipe already saved!",
+              type: "warning",
+            });
           setIsSyncing(false);
           return;
         }
       } else {
         // Add new recipe
         downloadedRecipes.push(recipeToSave);
-        toast.success("Recipe saved successfully!");
+        onAlert &&
+          onAlert({
+            message: "Recipe saved successfully!",
+            type: "success",
+          });
       }
 
       // Save updated recipes to local storage
@@ -120,7 +136,11 @@ export default function DownloadButton({ recipe }) {
       window.dispatchEvent(new Event("recipesDownloaded"));
     } catch (error) {
       console.error("Error saving recipe:", error);
-      toast.error("Failed to save recipe. Please try again.");
+      onAlert &&
+        onAlert({
+          message: "Failed to save recipe. Please try again.",
+          type: "error",
+        });
     } finally {
       setIsSyncing(false);
     }

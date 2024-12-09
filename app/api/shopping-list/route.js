@@ -17,7 +17,7 @@ import { authOptions } from "@/lib/auth";
  * @function POST
  * @param {Request} request - The HTTP request object containing the items to add to the shopping list.
  * @returns {NextResponse} - A JSON response containing the newly created list's ID, or an error message.
- * 
+ *
  * @throws {Error} - Returns a 500 error if an unexpected error occurs.
  *
  * @example

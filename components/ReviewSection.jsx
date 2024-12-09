@@ -493,7 +493,7 @@ function ReviewSection({ recipeId }) {
               >
                 <div className="flex-col items-center justify-between mb-3">
                   <div className="flex justify-between items-center space-x-3">
-                  {/* <div className="flex justify-between"> */}
+                    {/* <div className="flex justify-between"> */}
                     <strong className="text-gray-800 dark:text-gray-100">
                       {review.username}
                     </strong>
@@ -514,21 +514,20 @@ function ReviewSection({ recipeId }) {
                         </button>
                       </div>
                     )}
-                    </div>
-                    <div className="flex space-x-1">
-                      {Array.from({ length: 5 }).map((_, index) => (
-                        <Star
-                          key={index}
-                          className={`w-5 h-5 mt-2 ${
-                            index < review.rating
-                              ? "fill-yellow-400 text-yellow-400 dark:text-[#FFC857]"
-                              : "text-gray-300 dark:text-slate-600"
-                          }`}
-                        />
-                      ))}
-                    </div>
+                  </div>
+                  <div className="flex space-x-1">
+                    {Array.from({ length: 5 }).map((_, index) => (
+                      <Star
+                        key={index}
+                        className={`w-5 h-5 mt-2 ${
+                          index < review.rating
+                            ? "fill-yellow-400 text-yellow-400 dark:text-[#FFC857]"
+                            : "text-gray-300 dark:text-slate-600"
+                        }`}
+                      />
+                    ))}
+                  </div>
                   {/* </div> */}
-
                 </div>
 
                 {review.comment && (

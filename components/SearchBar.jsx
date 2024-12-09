@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getRecipeSuggestions } from "@/lib/api";
+import { RESET_SEARCH_EVENT } from "./FilterSection";
+
 
 /**
  * Metadata for the recipe search page
@@ -27,24 +29,37 @@ export const metadata = {
  * @param {Function} props.onToggle - Function to toggle search bar visibility
  * @returns {React.ReactElement} Rendered SearchBar component
  */
+
 const SearchBar = ({ isVisible, onToggle }) => {
-  // Router and search params hooks for navigation and URL management
-  const router = useRouter(); // Next.js router for programmatic navigation
-  const searchParams = useSearchParams(); // Access to current URL search parameters
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
+  const [suggestions, setSuggestions] = useState([]);
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-  // State management hooks
-  const [search, setSearch] = useState(searchParams.get("search") || ""); // Current search term
-  const [suggestions, setSuggestions] = useState([]); // API suggestions
-  const [searchHistory, setSearchHistory] = useState([]); // User's search history
-  const [loading, setLoading] = useState(false); // Loading state for suggestions
-  const [showSuggestions, setShowSuggestions] = useState(false); // Control suggestions dropdown
-  const [highlightedIndex, setHighlightedIndex] = useState(-1); // Keyboard navigation index
+  const searchInputRef = useRef(null);
+  const suggestionsRef = useRef(null);
+  const searchTimeoutRef = useRef(null);
+  const urlUpdateTimeoutRef = useRef(null);
 
-  // Refs for DOM elements and timeouts
-  const searchInputRef = useRef(null); // Reference to search input element
-  const suggestionsRef = useRef(null); // Reference to suggestions dropdown
-  const searchTimeoutRef = useRef(null); // Debounce timeout for search suggestions
-  const urlUpdateTimeoutRef = useRef(null); // Debounce timeout for URL updates
+  // Add event listener for reset
+  useEffect(() => {
+    const handleReset = () => {
+      setSearch("");
+      setSuggestions([]);
+      setShowSuggestions(false);
+      setHighlightedIndex(-1);
+    };
+
+    window.addEventListener(RESET_SEARCH_EVENT, handleReset);
+
+    return () => {
+      window.removeEventListener(RESET_SEARCH_EVENT, handleReset);
+    };
+  }, []);
 
   // Load search history from localStorage when component mounts
   useEffect(() => {

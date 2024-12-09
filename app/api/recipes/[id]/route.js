@@ -132,7 +132,10 @@ export async function PATCH(request, { params }) {
                 recipeId: id,
                 recipeTitle: description.slice(0, 30),
                 userName: userName,
-                message: `Recipe "${description.slice(0, 30)}..." has been updated by ${userName}`,
+                message: `Recipe "${description.slice(
+                  0,
+                  30
+                )}..." has been updated by ${userName}`,
                 url: `/recipes/${id}`,
               })
             );

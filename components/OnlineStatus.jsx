@@ -1,7 +1,7 @@
-'use client'; // Indicates this is a client-side component for Next.js App Router.
+"use client"; // Indicates this is a client-side component for Next.js App Router.
 
 import { useEffect, useState } from "react";
-import Alert from "./Alert"; 
+import Alert from "./Alert";
 
 export default function OnlineStatus() {
   // State to track the user's online status (true if online, false if offline).
@@ -10,7 +10,7 @@ export default function OnlineStatus() {
   // State to manage the alert's properties (message, type, visibility).
   const [alert, setAlert] = useState({
     message: "", // Alert message text.
-    type: "",    // Alert type (e.g., "success", "error").
+    type: "", // Alert type (e.g., "success", "error").
     show: false, // Visibility of the alert.
   });
 
@@ -22,14 +22,14 @@ export default function OnlineStatus() {
       const onlineStatus = navigator.onLine;
       setIsOnline(onlineStatus);
 
-
       setAlert({
-        message: onlineStatus ? "Online" : "Offline. No internet. Install the app for a better experience.",
-        type: onlineStatus ? "success" : "error", 
+        message: onlineStatus
+          ? "Online"
+          : "Offline. No internet. Install the app for a better experience.",
+        type: onlineStatus ? "success" : "error",
         show: true,
       });
 
-     
       setTimeout(() => {
         setAlert((prevAlert) => ({ ...prevAlert, show: false }));
       }, 5000);
@@ -39,7 +39,6 @@ export default function OnlineStatus() {
     window.addEventListener("online", updateOnlineStatus);
     window.addEventListener("offline", updateOnlineStatus);
 
-    
     const initialTimeout = setTimeout(() => {
       setAlert((prevAlert) => ({ ...prevAlert, show: false }));
     }, 5000);
@@ -48,7 +47,7 @@ export default function OnlineStatus() {
     return () => {
       window.removeEventListener("online", updateOnlineStatus);
       window.removeEventListener("offline", updateOnlineStatus);
-      clearTimeout(initialTimeout); 
+      clearTimeout(initialTimeout);
     };
   }, []); // Empty dependency array ensures this effect runs only once on mount.
 
@@ -58,8 +57,8 @@ export default function OnlineStatus() {
       {alert.show && (
         <Alert
           message={alert.message} // Pass the alert message.
-          type={alert.type}       // Pass the alert type (success/error).
-          isVisible={alert.show}  // Pass the visibility state.
+          type={alert.type} // Pass the alert type (success/error).
+          isVisible={alert.show} // Pass the visibility state.
           onClose={() => setAlert({ ...alert, show: false })} // Hide the alert on close.
         />
       )}

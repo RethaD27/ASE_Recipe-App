@@ -16,7 +16,7 @@ import {
   CookIcon,
   NutritionIcon,
   allergenSVGs,
-  Instructions
+  Instructions,
 } from "@/components/Svg";
 import TextToSpeech from "@/components/TextToSpeech";
 import ShoppingList from "@/components/ShoppingList";

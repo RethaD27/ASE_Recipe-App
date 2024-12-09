@@ -5,12 +5,18 @@
 The Recipe App is a cutting-edge platform designed to revolutionize how users discover, manage, and utilize recipes. Whether you're a home cook, a professional chef, or someone seeking inspiration, our app offers features to simplify and elevate your cooking experience.
 
 ### **Live Demo**
+
 https://culinary-haven-a.vercel.app/
 <br>
 
-![]()
-![]()
-![]()
+![Landing Page](/public/screenshots/ScreenshotLandingPage.png)
+![Recommended](/public/screenshots/ScreenshotRecommended.png)
+![Home Page](/public/screenshots/ScreenshotHomePage.png)
+![Recipe Details](/public/screenshots/ScreenshotRecipeDetails.png)
+![Download Page](/public/screenshots/ScreenshotDownloads.png)
+![Favorite Page](/public/screenshots/ScreenshotFavorite.png)
+![Shopping Lists Page](/public/screenshots/ScreenshotShoppingLists.png)
+![Install Notification](/public/screenshots/ScreenshotInstallNotification.png)
 
 ## Project Structure:
 
@@ -24,7 +30,11 @@ https://culinary-haven-a.vercel.app/
         |-- allergens
             |-- route.js
         |-- auth
+            |-- forgot-password
+                |-- route.js
             |-- profile
+                |-- route.js
+            |-- reset-password
                 |-- route.js
             |-- signup
                 |-- route.js
@@ -36,7 +46,6 @@ https://culinary-haven-a.vercel.app/
             |-- route.js
         |-- ingredients
             |-- route.js
-        |-- push
         |-- push-notifications
             |-- route.js
         |-- recipes
@@ -55,10 +64,13 @@ https://culinary-haven-a.vercel.app/
                 |-- route.js
         |-- suggestions
             |-- route.js
-        |-- sync
         |-- tags
             |-- route.js
     |-- auth
+        |-- forgot-password
+            |-- page.jsx
+        |-- reset-password
+            |-- page.jsx
         |-- signin
             |-- page.jsx
         |-- signup
@@ -69,6 +81,8 @@ https://culinary-haven-a.vercel.app/
     |-- favorites
         |-- page.jsx
     |-- globals.css
+    |-- hooks
+        |-- useOfflineStorage.js
     |-- layout.jsx
     |-- loading.jsx
     |-- not-found.jsx
@@ -76,6 +90,7 @@ https://culinary-haven-a.vercel.app/
     |-- profile
         |-- page.jsx
     |-- recipes
+        |-- page.jsx
         |-- [id]
             |-- page.jsx
     |-- shopping-list
@@ -87,17 +102,16 @@ https://culinary-haven-a.vercel.app/
     |-- BackButton.jsx
     |-- CategoryFilter.jsx
     |-- ClearFiltersButton.jsx
+    |-- ConfirmationModal.jsx
     |-- DownloadButton.jsx
     |-- ErrorShared.jsx
-    |-- FavoritesButton.jsx
-    |-- FavoritesCount.jsx
     |-- FilterSection.jsx
     |-- Footer.jsx
     |-- Gallery.jsx
     |-- Header.jsx
-    |-- HeroSection.jsx
     |-- ImageSelector.jsx
     |-- IngredientsFilter.jsx
+    |-- IngredientUnit.jsx
     |-- Loader.jsx
     |-- NumberOfStepsFilter.jsx
     |-- OnlineStatus.jsx
@@ -130,7 +144,6 @@ https://culinary-haven-a.vercel.app/
 |-- package-lock.json
 |-- package.json
 |-- postcss.config.mjs
-|-- project_structure.text
 |-- public
     |-- android-chrome-192x192.png
     |-- android-chrome-512x512.png
@@ -138,8 +151,17 @@ https://culinary-haven-a.vercel.app/
     |-- favicon-16x16.png
     |-- favicon-32x32.png
     |-- favicon.ico
-    |-- hero_section1.jpg
+    |-- HomePage_Image.jpg
     |-- logo.png
+    |-- screenshots
+        |-- ScreenshotDownloads.png
+        |-- ScreenshotFavorite.png
+        |-- ScreenshotHomePage.png
+        |-- ScreenshotInstallNotification.png
+        |-- ScreenshotLandingPage.png
+        |-- ScreenshotRecipeDetails.png
+        |-- ScreenshotRecommended.png
+        |-- ScreenshotShoppingLists.png
     |-- service-worker.js
     |-- site.webmanifest
     |-- sw.js
@@ -149,6 +171,7 @@ https://culinary-haven-a.vercel.app/
     |-- validateManifest.js
 |-- tailwind.config.js
 |-- ThemeContext.js
+
 
 ```
 
@@ -176,7 +199,8 @@ Have questions or need support? Reach out to the team:
 - GitHub Issues: Report an Issue
 - Community: Join us on Discord.
 
-## Contributors - *We're here to help!*
+## Contributors - _We're here to help!_
+
 - [Inolofatseng Motloba](https://github.com/InolofatsengMotloba)
 - [Neo Mosotho](https://github.com/neomosotho)
 - [Rethabile Diale](https://github.com/RethaD27)
@@ -185,7 +209,6 @@ Have questions or need support? Reach out to the team:
 - [Ndumiso Sibanda](https://github.com/Ndumiso-Sibanda)
 - [Nkosinathi Milanzi](https://github.com/Nathilanzi)
 - [Mohau Mushi](https://github.com/MohauMushi)
-
 
 ## 📚 API Documentation
 
@@ -279,6 +302,11 @@ NEXTAUTH_URL=http://localhost:3000
 API_BASE_URL=http://localhost:3000
 NEXT_PUBLIC_VAPID_PUBLIC_KEY=
 VAPID_PRIVATE_KEY=
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+EMAIL_USER=
+EMAIL_PASS=
 ```
 
 Replace the placeholders with your actual values.

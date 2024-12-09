@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image"; 
-import Link from "next/link"; 
+import Image from "next/image";
+import Link from "next/link";
 import { Telescope, LogIn } from "lucide-react";
 import { useState, useEffect } from "react"; // Import useEffect and useState
 
@@ -27,7 +27,10 @@ export default function Home() {
     window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
     };
   }, []);
 
@@ -37,7 +40,11 @@ export default function Home() {
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
 
-    console.log(outcome === "accepted" ? "User accepted the install prompt" : "User dismissed the install prompt");
+    console.log(
+      outcome === "accepted"
+        ? "User accepted the install prompt"
+        : "User dismissed the install prompt"
+    );
 
     setDeferredPrompt(null);
     setShowInstallPrompt(false);
@@ -66,7 +73,7 @@ export default function Home() {
            to-teal-500/30 dark:to-slate-700/40"
         />
       </div>
-      
+
       {/* Content Container with Elegant Typography */}
       <div className="relative z-10 h-full flex items-center">
         <div className="container mx-auto px-6 sm:px-8 lg:px-12">
@@ -86,11 +93,11 @@ export default function Home() {
                mb-8 max-w-2xl
                leading-relaxed"
             >
-              Embark on a gastronomic journey through our meticulously curated 
-              recipe collections. From innovative weeknight meals to exquisite 
+              Embark on a gastronomic journey through our meticulously curated
+              recipe collections. From innovative weeknight meals to exquisite
               gourmet experiences.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/recipes"
@@ -126,7 +133,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
+
       {/* Subtle Bottom Gradient */}
       <div
         className="absolute bottom-0 left-0 w-full h-24 

@@ -32,7 +32,7 @@ function ResultsSummary({ total, filters }) {
   const { tags, numberOfSteps, ingredients, category, search } = filters;
 
   return (
-    <div className="flex items-center gap-2 mt-4 text-gray-600 font-medium">
+    <div className="flex items-center gap-2 mt-4 text-gray-600 font-medium pl-28">
       <SearchIcon className="w-4 h-4" />
       <span>
         {total.toLocaleString()} matching {total === 1 ? "recipe" : "recipes"}
@@ -115,14 +115,14 @@ export default async function Home({ searchParams: rawSearchParams }) {
   const tags = Array.isArray(searchParams["tags[]"])
     ? searchParams["tags[]"]
     : searchParams["tags[]"]
-      ? [searchParams["tags[]"]]
-      : [];
+    ? [searchParams["tags[]"]]
+    : [];
 
   const ingredients = Array.isArray(searchParams["ingredients[]"])
     ? searchParams["ingredients[]"]
     : searchParams["ingredients[]"]
-      ? [searchParams["ingredients[]"]]
-      : [];
+    ? [searchParams["ingredients[]"]]
+    : [];
 
   // Fetch all data concurrently
   const [recipesData, categories, availableTags, availableIngredients] =

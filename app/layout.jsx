@@ -134,9 +134,7 @@ export default async function RootLayout({ children }) {
             <Header />
             <OnlineStatus />
             <PushNotificationManager />
-            <main className="pt-16 min-h-screen">
-              {children}
-            </main>
+            <main className="pt-16 min-h-screen">{children}</main>
             <Footer />
             <PWAInstallPrompt />
           </ThemeProvider>
